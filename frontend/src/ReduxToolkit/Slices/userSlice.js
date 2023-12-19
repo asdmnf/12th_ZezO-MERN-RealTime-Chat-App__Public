@@ -56,7 +56,6 @@ const userSlice = createSlice({
       state.usersData = []
     },
     onlineUsers(state, action) { 
-      console.log(action.payload, "onlineUsersLocalAction")
       state.onlineUsersData = action.payload
     }
   },
