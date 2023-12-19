@@ -1,4 +1,72 @@
-# Getting Started with Create React App
+# Getting Started with 12th_ZezO-MERN-RealTime-Chat-App
+
+This project was deployed at [12th_ZezO-MERN-RealTime-Chat-App](https://asdmnf.github.io/12th_ZezO-MERN-RealTime-Chat-App__Public/).
+
+### `Important Note`
+
+> i followed [this tutorial](https://www.youtube.com/playlist?list=PLKhlp2qtUcSZsGkxAdgnPcHioRr-4guZf) as a guide only, you can see diffrence by yourself i added alot of missing features depending on myself and even you can compare my code to tutorial the similarity is almost weak, i am not watching tutorials code i do only if i fail
+
+### `Features`
+
+**all features applied to single chats and group chats.**
+
+* Authentication.\
+* Protected Routes.\
+* Realtime Messages.\
+* Realtime Messages Status.\
+* Realtime User Typing Status.\
+* Realtime Last Message with it's Status.\
+* Realtime Group Last Message with it's Status and Sender.\
+* Realtime Online and Offline Users.\
+* Realtime Alert when User Go Offline or Online.\
+* Realtime Offline Users Last Seen.\
+* Realtime Group Active Members and you can see thier Profiles.\
+* Realtime Group Messages Recipients and you can see thier Profiles.\
+* Realtime New Messages Counter.\
+* Realtime New Messages Status\
+> like whatsapp if you send a message to a friend and he is not connected to the internet and when he connect to the internet you can see the status changed from one check mark icon to double check mark and colored double check mark if he entered chat you can see this here if you are active on chat or from last message indicator on chat.\
+* Realtime Notifications Counter.\
+* Realtime New Message Notification Alert.\
+* Preview Message from Notification Like Mobile Notification.\
+* Every Group Member has it's own New Messages.\
+* Category Messages by Date and Time.\
+* Loading Spinners.\
+* Loading Placeholders.\
+* Debounced Search.\
+> request server query only if you stop typing not with every character typed.\
+* Chats Pagination with Infinite Scroll (implemented manually not a package).\
+> not all documents will be loaded, if you need more just scroll.\
+
+### `Achieved by`
+
+* socket.io.\
+* reactjs.\
+* nodejs.\
+* expressjs.\
+* mongoDB.\
+* cloudinary.\
+* bootstrap.\
+* react-bootstrap.\
+* axios.\
+* redux-Toolkit.\
+* formik.\
+* yup.\
+* lodash.\
+* moment.
+
+### `Note`
+
+i think it is fully SPA (Single Page Application) no need to reload at all.
+
+may be this project is not completed as i wish.\
+but i prefer to keep it like that to remember my begins.
+
+
+
+
+
+
+<!-- # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -67,4 +135,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 ### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify) -->
