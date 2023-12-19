@@ -4,54 +4,54 @@ This project was deployed at [12th_ZezO-MERN-RealTime-Chat-App](https://asdmnf.g
 
 ### `Important Note`
 
-> i followed [this tutorial](https://www.youtube.com/playlist?list=PLKhlp2qtUcSZsGkxAdgnPcHioRr-4guZf) as a guide only, you can see diffrence by yourself i added alot of missing features depending on myself and even you can compare my code to tutorial the similarity is almost weak, i am not watching tutorials code i do only if i fail
+> i followed [this tutorial](https://www.youtube.com/playlist?list=PLKhlp2qtUcSZsGkxAdgnPcHioRr-4guZf) as a guide only, you can see diffrence by yourself i added alot of missing features depending on myself and even you can compare my code to tutorial the similarity is almost weak, i am not watching tutorials code i do only if i fail.
 
 ### `Features`
 
-**all features applied to single chats and group chats.**
+**all features applied to single and group chats.**
 
-* Authentication.\
-* Protected Routes.\
-* Realtime Messages.\
-* Realtime Messages Status.\
-* Realtime User Typing Status.\
-* Realtime Last Message with it's Status.\
-* Realtime Group Last Message with it's Status and Sender.\
-* Realtime Online and Offline Users.\
-* Realtime Alert when User Go Offline or Online.\
-* Realtime Offline Users Last Seen.\
-* Realtime Group Active Members and you can see thier Profiles.\
-* Realtime Group Messages Recipients and you can see thier Profiles.\
-* Realtime New Messages Counter.\
-* Realtime New Messages Status\
-> like whatsapp if you send a message to a friend and he is not connected to the internet and when he connect to the internet you can see the status changed from one check mark icon to double check mark and colored double check mark if he entered chat you can see this here if you are active on chat or from last message indicator on chat.\
-* Realtime Notifications Counter.\
-* Realtime New Message Notification Alert.\
-* Preview Message from Notification Like Mobile Notification.\
-* Every Group Member has it's own New Messages.\
-* Category Messages by Date and Time.\
-* Loading Spinners.\
-* Loading Placeholders.\
-* Debounced Search.\
-> request server query only if you stop typing not with every character typed.\
-* Chats Pagination with Infinite Scroll (implemented manually not a package).\
-> not all documents will be loaded, if you need more just scroll.\
+* Authentication.
+* Protected Routes.
+* Realtime Messages.
+* Realtime Messages Status.
+* Realtime User Typing Status.
+* Realtime Last Message with it's Status.
+* Realtime Group Last Message with it's Status and Sender.
+* Realtime Online and Offline Users.
+* Realtime Alert when User Go Offline or Online.
+* Realtime Offline Users Last Seen.
+* Realtime Group Active Members and you can see thier Profiles.
+* Realtime Group Messages Recipients and you can see thier Profiles.
+* Realtime New Messages Counter.
+* Realtime New Messages Status
+> like whatsapp if you send a message to a friend and he is not connected to the internet and when he connect to the internet you can see the status changed from one check mark icon to double check mark and colored double check mark if he entered chat you can see this here if you are active on chat or from last message indicator on chat.
+* Realtime Notifications Counter.
+* Realtime New Message Notification Alert.
+* Preview Message from Notification Like Mobile Notification.
+* Every Group Member has it's own New Messages.
+* Category Messages by Date and Time.
+* Loading Spinners.
+* Loading Placeholders.
+* Debounced Search.
+> request server query only if you stop typing not with every character typed.
+* Chats Pagination with Infinite Scroll (implemented manually not a package).
+> not all documents will be loaded, if you need more just scroll.
 
 ### `Achieved by`
 
-* socket.io.\
-* reactjs.\
-* nodejs.\
-* expressjs.\
-* mongoDB.\
-* cloudinary.\
-* bootstrap.\
-* react-bootstrap.\
-* axios.\
-* redux-Toolkit.\
-* formik.\
-* yup.\
-* lodash.\
+* socket.io.
+* reactjs.
+* nodejs.
+* expressjs.
+* mongoDB.
+* cloudinary.
+* bootstrap.
+* react-bootstrap.
+* axios.
+* redux-Toolkit.
+* formik.
+* yup.
+* lodash.
 * moment.
 
 ### `Note`
