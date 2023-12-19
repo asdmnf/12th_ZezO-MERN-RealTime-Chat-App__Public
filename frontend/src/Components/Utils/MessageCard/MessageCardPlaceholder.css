@@ -1,0 +1,33 @@
+.message-card_placeholder {
+  cursor: wait;
+}
+
+.message-card_placeholder-img-simulation {
+  width: 45px;
+  height: 45px;
+  background-color: var(--bs-primary);
+  border-radius: 40px;
+  opacity: .3;
+  animation: message-card_placeholder-glow 2s ease-in-out infinite;
+}
+
+.message-card_card-placeholder {
+  width: 200px;
+  height: 41px;
+  background-color: var(--bs-primary);
+  border-radius: 20px;
+  border-top-left-radius: 5px;
+  opacity: .3;
+  animation: message-card_placeholder-glow 2s ease-in-out infinite;
+}
+
+.message-card_placeholder_chat-owner {
+  border-top-right-radius: 5px;
+  border-top-left-radius: 20px;
+}
+
+@keyframes message-card_placeholder-glow {
+  50% {
+    opacity: .1;
+}
+}

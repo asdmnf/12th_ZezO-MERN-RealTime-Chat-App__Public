@@ -1,0 +1,12 @@
+.homepage_app-name, .homepage_login-signup {
+  background-color: aliceblue;
+  border-radius: 10px;
+  
+}
+.homepage_login-signup li {
+  border: 1px solid var(--bs-primary);
+  border-radius: 10px;
+}
+.homepage_login-signup li a {
+  font-weight: bold;
+}

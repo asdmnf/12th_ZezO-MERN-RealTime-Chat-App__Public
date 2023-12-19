@@ -1,0 +1,81 @@
+.message-card {
+  position: relative;
+  line-height: 14px;
+}
+
+.message-card_image {
+  position: relative;
+}
+
+.message-card_image img {
+  width: 45px;
+  cursor: pointer;
+  border-radius: 5px;
+  filter: drop-shadow(0 .125rem .25rem rgba(0,0,0,.075));
+  position: relative;
+  top: -15px;
+}
+
+.message-card_card {
+  max-width: 60%;
+  background-color: var(--bs-gray-100);
+  border-radius: 20px;
+  border-top-left-radius: 5px;
+  cursor: pointer;
+}
+
+.message-card_chat-owner {
+  border-top-right-radius: 5px;
+  border-top-left-radius: 20px;
+}
+
+.message-card_same-sender {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.message-card_chat-owner.message-card_same-sender {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.message-card_online-indicator {
+  width: 15px;
+  height: 15px;
+  border: 2px solid var(--bs-gray-300);
+  border-radius: 50%;
+  position: absolute;
+  bottom: 12px;
+  left: 35px;
+  z-index: 99;
+}
+
+.message-card_message {
+  padding-right: 15px;
+  padding-bottom: 2px;
+}
+
+.message-card_info {
+  color: var(--bs-gray);
+  font-size: 13px;
+  text-align: end;
+  margin-left: 50px;
+}
+
+.message-card_seen {
+  margin-left: 5px;
+}
+.message-card_seen-by{
+  position: absolute;
+  bottom: -15px;
+  right: 25px;
+}
+
+.message-card_seen-by img {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--bs-primary-100);
+  margin-right: 2px;
+  cursor: pointer;
+}

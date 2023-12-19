@@ -1,0 +1,72 @@
+
+
+.chats-page_header {
+  background-color: white;
+  padding: 5px;
+}
+
+.chats-page_header-inner {
+  background-color: aliceblue;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.chats-page_header-inner-search{
+  font-size: 20px;
+  cursor: pointer;
+  user-select: none;
+}
+.chats-page_header-inner-search i{
+  margin-right: 10px;
+  color: var(--bs-primary);
+}
+
+.chats-page_header-inner-logo {
+  font-size: 30px;
+  font-weight: bold;
+  user-select: none;
+}
+
+.chats-page_header-inner-notification{
+  font-size: 20px;
+}
+
+.chats-page_header-inner-notification i{
+  margin-right: 20px;
+  color: var(--bs-primary);
+  cursor: pointer;
+}
+
+.chats-page_header-inner-profile-img {
+  max-height: 30px;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+
+.notification-dropdown_menu {
+  /* width: 330px; */
+  width: 400px;
+  padding: 10px;
+  background-color: var(--bs-gray-300);
+  max-height: 500px;
+  overflow: auto;
+}
+
+.notification-dropdown_no-notification-icon i{
+  cursor: default;
+}
+
+.notification-dropdown_count-badge {
+  position: absolute;
+  left: 2px;
+  top: -4px;
+}
+
+
+/* media queries */
+
+@media (max-width: 700px) {
+  .chats-page_header-inner-logo {
+    font-size: 25px;
+  }
+}
