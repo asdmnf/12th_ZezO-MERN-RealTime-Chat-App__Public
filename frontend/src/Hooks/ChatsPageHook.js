@@ -867,7 +867,7 @@ const ChatsPageHook = () => {
   const [socket, setSocket] = useState(null)
 
   useEffect(() => { 
-    const socket = io("127.0.0.1:8000", {
+    const socket = io("https://zezo-mern-chat-app-server.onrender.com", {
       query: {
         userId: JSON.parse(localStorage.getItem("userData"))._id,
         name: JSON.parse(localStorage.getItem("userData")).name,
