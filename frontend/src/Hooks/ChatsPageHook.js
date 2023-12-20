@@ -218,14 +218,67 @@ const ChatsPageHook = () => {
         }
         dispatch(resetUserData())
 
+        // all repeated code will be reduced later
+        // --------------------------------------------------------------------------------------------------------------------
+
+        const groupChatProfilePicOrSingleChatProfilePic = 
+        (
+          res.payload.data.data.users[0]._id === JSON.parse(localStorage.getItem("userData"))._id ? 
+          res.payload.data.data.users[1].profilePic 
+          : 
+          res.payload.data.data.users[0].profilePic 
+        )
+
+        const groupChatNameOrSingleChatUserName = 
+        (
+          res.payload.data.data.users[0]._id === JSON.parse(localStorage.getItem("userData"))._id ? 
+          res.payload.data.data.users[1].name 
+          : 
+          res.payload.data.data.users[0].name 
+        )
+
+        const groupChatUsersOrSingleChatUser = 
+        (
+          res.payload.data.data.users[0]._id === JSON.parse(localStorage.getItem("userData"))._id ? 
+          res.payload.data.data.users[1] 
+          : 
+          res.payload.data.data.users[0]
+        )
+
+        socket?.emit("join-chat-room", res.payload.data.data._id, res.payload.data.data.isGroupChat, res.payload.data.data.latestMessage)
+
         setClickedChatCardData({
           _id: res.payload.data.data._id,
           isGroupChat: res.payload.data.data.isGroupChat,
           groupAdmin: res.payload.data.data.groupAdmin,
-          profilePic: res.payload.data.data.users[0]._id === JSON.parse(localStorage.getItem("userData"))._id ? res.payload.data.data.users[1].profilePic : res.payload.data.data.users[0].profilePic,
-          name: res.payload.data.data.users[0]._id === JSON.parse(localStorage.getItem("userData"))._id ? res.payload.data.data.users[1].name : res.payload.data.data.users[0].name,
-          users: res.payload.data.data.users[0]._id === JSON.parse(localStorage.getItem("userData"))._id ? res.payload.data.data.users[1] : res.payload.data.data.users[0],
+          profilePic: groupChatProfilePicOrSingleChatProfilePic,
+          name: groupChatNameOrSingleChatUserName,
+          users: groupChatUsersOrSingleChatUser,
         })
+
+        if (groupChatUsersOrSingleChatUser?.lastSeen) {
+    
+          const currentDateTime = moment()
+          const lastSeenDateTime = moment(groupChatUsersOrSingleChatUser.lastSeen) 
+          const isSameDay = currentDateTime.isSame(lastSeenDateTime, "day")
+          const isMoreThanDay = currentDateTime.diff(lastSeenDateTime, "days")
+          const isSameWeek = currentDateTime.isSame(lastSeenDateTime, "week")
+          const isMoreThanWeek = currentDateTime.diff(lastSeenDateTime, "weeks")
+    
+          if (isSameDay) {
+            setLastSeen(lastSeenDateTime.format("[Today at] HH:mm"))
+          } else if (isMoreThanDay === 1) {
+            setLastSeen(lastSeenDateTime.format("[Yesterday at] HH:mm"))
+          } else if (isMoreThanDay > 1 && isMoreThanDay < 5) {
+            setLastSeen(lastSeenDateTime.format("ddd HH:mm"))
+          } else if(isMoreThanDay >= 5 && isSameWeek) {
+            setLastSeen(lastSeenDateTime.format("[Last] ddd HH:mm"))
+          } else if (isMoreThanWeek >= 1) {
+            setLastSeen(lastSeenDateTime.format("MMM DD HH:mm"))
+          }
+        }
+
+        // --------------------------------------------------------------------------------------------------------------------
 
         setChatCardIsClicked(true)
 
