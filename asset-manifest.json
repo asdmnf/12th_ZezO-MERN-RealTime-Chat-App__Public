@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/12th_ZezO-MERN-RealTime-Chat-App__Public/static/css/main.7d2573f9.css",
-    "main.js": "/12th_ZezO-MERN-RealTime-Chat-App__Public/static/js/main.efcf8507.js",
+    "main.css": "/12th_ZezO-MERN-RealTime-Chat-App__Public/static/css/main.5ce797bd.css",
+    "main.js": "/12th_ZezO-MERN-RealTime-Chat-App__Public/static/js/main.a28c81dc.js",
     "static/media/chat-bg.jpg": "/12th_ZezO-MERN-RealTime-Chat-App__Public/static/media/chat-bg.b15256d16b56f89d6123.jpg",
     "index.html": "/12th_ZezO-MERN-RealTime-Chat-App__Public/index.html",
-    "main.7d2573f9.css.map": "/12th_ZezO-MERN-RealTime-Chat-App__Public/static/css/main.7d2573f9.css.map",
-    "main.efcf8507.js.map": "/12th_ZezO-MERN-RealTime-Chat-App__Public/static/js/main.efcf8507.js.map"
+    "main.5ce797bd.css.map": "/12th_ZezO-MERN-RealTime-Chat-App__Public/static/css/main.5ce797bd.css.map",
+    "main.a28c81dc.js.map": "/12th_ZezO-MERN-RealTime-Chat-App__Public/static/js/main.a28c81dc.js.map"
   },
   "entrypoints": [
-    "static/css/main.7d2573f9.css",
-    "static/js/main.efcf8507.js"
+    "static/css/main.5ce797bd.css",
+    "static/js/main.a28c81dc.js"
   ]
 }
