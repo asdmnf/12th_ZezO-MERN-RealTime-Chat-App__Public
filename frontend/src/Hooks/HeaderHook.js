@@ -10,7 +10,7 @@ import { getAllUserChatsAction, getSpecificChatAction } from "../ReduxToolkit/Sl
 import { getAllChatMessagesAction } from "../ReduxToolkit/Slices/messageSlice"
 
 
-const HeaderHook = (socket, chatData, setChatData, chatCardRefs, setChatCardIsClicked, setChatCardonClickId, setChatCardActiveStatus, setClickedChatCardData, groupChatMessages, setAllChatMessages) => {
+const HeaderHook = (socket, chatData, setChatData, chatCardRefs, setChatCardIsClicked, setChatCardonClickId, setChatCardActiveStatus, setClickedChatCardData, groupChatMessages, setAllChatMessages, setLastSeen) => {
 
   const dispatch = useDispatch()
 
@@ -184,8 +184,8 @@ const HeaderHook = (socket, chatData, setChatData, chatCardRefs, setChatCardIsCl
 
       const Toast = Swal.mixin({
         toast: true,
-        width: 500,
         position: 'top-start',
+        width: "fit-content",
         showConfirmButton: false,
         timer: 2000,
         timerProgressBar: true,
@@ -313,8 +313,6 @@ const HeaderHook = (socket, chatData, setChatData, chatCardRefs, setChatCardIsCl
     .then( async res => {
       if (res.payload.status === 200) {
 
-        socket?.emit("join-chat-room", res.payload.data._id, res.payload.data.isGroupChat)
-
           let isFound = false
           chatData?.filter(async (item, index, arr) => {
             if (item._id === res.payload.data._id) {
@@ -330,20 +328,70 @@ const HeaderHook = (socket, chatData, setChatData, chatCardRefs, setChatCardIsCl
               )
               .then(async (allUserChatsRes) => {
                 if (allUserChatsRes.payload.status === 200) {
-                  setChatData(allUserChatsRes.payload.data)                  
+                  setChatData(allUserChatsRes.payload.data)
                   setDispatchIsLoaded(true)
                 }
               });
             }
 
-          setClickedChatCardData({
-            _id: res.payload.data._id,
-            isGroupChat: res.payload.data.isGroupChat,
-            groupAdmin: res.payload.data.groupAdmin,
-            profilePic: res.payload.data.users[0]._id === JSON.parse(localStorage.getItem("userData"))._id ? res.payload.data.users[1].profilePic : res.payload.data.users[0].profilePic,
-            name: res.payload.data.users[0]._id === JSON.parse(localStorage.getItem("userData"))._id ? res.payload.data.users[1].name : res.payload.data.users[0].name,
-            users: res.payload.data.users[0]._id === JSON.parse(localStorage.getItem("userData"))._id ? res.payload.data.users[1] : res.payload.data.users[0],
-          })
+      const groupChatProfilePicOrSingleChatProfilePic = res.payload.data.isGroupChat ? 
+      "https://uploads-ssl.webflow.com/628e4f5e9ef1f537daf6c9e2/6294a420b645545b1c6a3be1_Vector.png" : 
+      (
+        res.payload.data.users[0]._id === JSON.parse(localStorage.getItem("userData"))._id ? 
+        res.payload.data.users[1].profilePic : 
+        res.payload.data.users[0].profilePic 
+      )
+
+      const groupChatNameOrSingleChatUserName = res.payload.data.isGroupChat ? 
+      res.payload.data.chatName : 
+      (
+        res.payload.data.users[0]._id === JSON.parse(localStorage.getItem("userData"))._id ? 
+        res.payload.data.users[1].name : 
+        res.payload.data.users[0].name 
+      )
+
+      const groupChatUsersOrSingleChatUser = res.payload.data.isGroupChat ? 
+      res.payload.data.users : 
+      (
+        res.payload.data.users[0]._id === JSON.parse(localStorage.getItem("userData"))._id ? 
+        res.payload.data.users[1] : 
+        res.payload.data.users[0]
+      )
+
+      socket?.emit("join-chat-room", res.payload.data._id, res.payload.data.isGroupChat, res.payload.data.latestMessage)
+
+      setChatCardIsClicked(true)
+
+      setClickedChatCardData({
+        _id: res.payload.data._id,
+        isGroupChat: res.payload.data.isGroupChat,
+        groupAdmin: res.payload.data.groupAdmin,
+        profilePic: groupChatProfilePicOrSingleChatProfilePic,
+        name: groupChatNameOrSingleChatUserName,
+        users: groupChatUsersOrSingleChatUser,
+      })
+
+      if (!res.payload.data.isGroupChat && groupChatUsersOrSingleChatUser.lastSeen) {
+  
+        const currentDateTime = moment()
+        const lastSeenDateTime = moment(groupChatUsersOrSingleChatUser.lastSeen)
+        const isSameDay = currentDateTime.isSame(lastSeenDateTime, "day")
+        const isMoreThanDay = currentDateTime.diff(lastSeenDateTime, "days")
+        const isSameWeek = currentDateTime.isSame(lastSeenDateTime, "week")
+        const isMoreThanWeek = currentDateTime.diff(lastSeenDateTime, "weeks")
+  
+        if (isSameDay) {
+          setLastSeen(lastSeenDateTime.format("[Today at] HH:mm"))
+        } else if (isMoreThanDay === 1) {
+          setLastSeen(lastSeenDateTime.format("[Yesterday at] HH:mm"))
+        } else if (isMoreThanDay > 1 && isMoreThanDay < 5) {
+          setLastSeen(lastSeenDateTime.format("ddd HH:mm"))
+        } else if(isMoreThanDay >= 5 && isSameWeek) {
+          setLastSeen(lastSeenDateTime.format("[Last] ddd HH:mm"))
+        } else if (isMoreThanWeek >= 1) {
+          setLastSeen(lastSeenDateTime.format("MMM DD HH:mm"))
+        }
+      }
 
           await dispatch(getAllChatMessagesAction({
             chatId: chatId,

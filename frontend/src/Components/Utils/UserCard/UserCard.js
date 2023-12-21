@@ -112,7 +112,7 @@ const UserCard = (props) => {
       </div>
       <div
         className={`d-flex ${
-          props.isNotificationCard ? "" : "align-items-center"
+          props.isNotificationCard ? "gap-1" : "align-items-center"
         }`}
       >
         <span

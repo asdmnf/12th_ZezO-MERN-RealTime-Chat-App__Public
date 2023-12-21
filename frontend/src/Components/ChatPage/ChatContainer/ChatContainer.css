@@ -12,6 +12,9 @@
 .chat-container_header-title {
   font-size: 24px;
   font-weight: bold;
+  height: 50px;
+  display: flex;
+  align-items: center;
 }
 
 .chat-container_header-chat-image img {

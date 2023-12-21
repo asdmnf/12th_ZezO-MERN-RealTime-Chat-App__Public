@@ -89,6 +89,15 @@
   margin-top: 2px;
 }
 
+.latest-message_date-and-time{
+  position: absolute;
+  right: 16px;
+  bottom: 11px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--bs-primary);
+}
+
 /* media queries */
 
 @media (max-width: 768px) {

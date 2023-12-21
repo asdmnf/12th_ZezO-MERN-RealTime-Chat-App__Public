@@ -101,14 +101,14 @@
 
 .user-card_notification-card-delete-icon {
   position: absolute;
-  right: -11px;
-  top: 7px;
+  right: -16px;
+  top: 3px;
 }
 
 
 .user-card_seen-icon {
   position: absolute;
-  right: -11px;
+  right: -16px;
   bottom: -10px;
 }
 

@@ -688,7 +688,16 @@ io.on("connection", async (socket) => {
               return socketId 
             })
 
-            io.to(connectedUsers.get(userId)).to(onlineUsersSocketsIds).emit("realtime-chat-data-latest-message-and-counter", newChatDocument)
+            const activeUsersIds = activeUsers.map(user => user._id)
+
+            const activeUsersSocketsIds = activeUsersIds.map(id => { 
+              const socketId = connectedUsers.get(id)
+              return socketId
+            })
+
+            const activeAndOnlineUsersSocketsIds = [...onlineUsersSocketsIds, ...activeUsersSocketsIds]
+
+            io.to(connectedUsers.get(userId)).to(activeAndOnlineUsersSocketsIds).emit("realtime-chat-data-latest-message-and-counter", newChatDocument)
           
         } catch (error) {
           console.log(colors.bgRed(error))

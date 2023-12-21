@@ -178,14 +178,62 @@ const ChatsPageHook = () => {
         setChatCardActiveStatus(true)
         dispatch(resetUserData())
 
+        // repeated coded will be reduced later
+        const groupChatProfilePicOrSingleChatProfilePic = 
+        (
+          res.payload.data.data.users[0]._id === JSON.parse(localStorage.getItem("userData"))._id ? 
+          res.payload.data.data.users[1].profilePic 
+          : 
+          res.payload.data.data.users[0].profilePic 
+        )
+
+        const groupChatNameOrSingleChatUserName = 
+        (
+          res.payload.data.data.users[0]._id === JSON.parse(localStorage.getItem("userData"))._id ? 
+          res.payload.data.data.users[1].name 
+          : 
+          res.payload.data.data.users[0].name 
+        )
+
+        const groupChatUsersOrSingleChatUser = 
+        (
+          res.payload.data.data.users[0]._id === JSON.parse(localStorage.getItem("userData"))._id ? 
+          res.payload.data.data.users[1] 
+          : 
+          res.payload.data.data.users[0]
+        )
+
+        socket?.emit("join-chat-room", res.payload.data.data._id, res.payload.data.data.isGroupChat, res.payload.data.data.latestMessage)
+
         setClickedChatCardData({
           _id: res.payload.data.data._id,
           isGroupChat: res.payload.data.data.isGroupChat,
           groupAdmin: res.payload.data.data.groupAdmin,
-          profilePic: res.payload.data.data.users[1].profilePic,
-          name: res.payload.data.data.users[1].name,
-          users: res.payload.data.data.users[1],
+          profilePic: groupChatProfilePicOrSingleChatProfilePic,
+          name: groupChatNameOrSingleChatUserName,
+          users: groupChatUsersOrSingleChatUser,
         })
+
+        if (groupChatUsersOrSingleChatUser?.lastSeen) {
+          const currentDateTime = moment() 
+          const lastSeenDateTime = moment(groupChatUsersOrSingleChatUser.lastSeen) 
+          const isSameDay = currentDateTime.isSame(lastSeenDateTime, "day") 
+          const isMoreThanDay = currentDateTime.diff(lastSeenDateTime, "days") 
+          const isSameWeek = currentDateTime.isSame(lastSeenDateTime, "week") 
+          const isMoreThanWeek = currentDateTime.diff(lastSeenDateTime, "weeks") 
+    
+          if (isSameDay) {
+            setLastSeen(lastSeenDateTime.format("[Today at] HH:mm")) 
+          } else if (isMoreThanDay === 1) {
+            setLastSeen(lastSeenDateTime.format("[Yesterday at] HH:mm"))
+          } else if (isMoreThanDay > 1 && isMoreThanDay < 5) {
+            setLastSeen(lastSeenDateTime.format("ddd HH:mm"))
+          } else if(isMoreThanDay >= 5 && isSameWeek) {
+            setLastSeen(lastSeenDateTime.format("[Last] ddd HH:mm"))
+          } else if (isMoreThanWeek >= 1) {
+            setLastSeen(lastSeenDateTime.format("MMM DD HH:mm"))
+          }
+        }
 
         setChatCardIsClicked(true)
 
@@ -343,6 +391,7 @@ const ChatsPageHook = () => {
         const Toast = Swal.mixin({
           toast: true,
           position: 'top-end',
+          width: "fit-content",
           showConfirmButton: false,
           timer: 1000,
           timerProgressBar: true,
@@ -449,6 +498,7 @@ const ChatsPageHook = () => {
             const Toast = Swal.mixin({
               toast: true,
               position: 'top-end',
+              width: "fit-content",
               showConfirmButton: false,
               timer: 1000,
               timerProgressBar: true,
@@ -529,6 +579,8 @@ const ChatsPageHook = () => {
         setChatCardActiveStatus(true) 
         dispatch(resetUserData())
 
+        socket?.emit("join-chat-room", res.payload.data.data._id, res.payload.data.data.isGroupChat, res.payload.data.data.latestMessage)
+
         setClickedChatCardData({ 
           _id: res.payload.data.data._id,
           isGroupChat: res.payload.data.data.isGroupChat,
@@ -542,8 +594,6 @@ const ChatsPageHook = () => {
         if (window.matchMedia('(max-width: 768px)').matches) { 
           setIsMobileSize(!isMobileSize)
         }
-
-        socket?.emit("join-chat-room", res.payload.data.data._id, res.payload.data.data.isGroupChat, res.payload.data.data.latestMessage)
       }
     })
     
@@ -730,6 +780,7 @@ const ChatsPageHook = () => {
       const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
+        width: "fit-content",
         showConfirmButton: false,
         timer: 1000,
         timerProgressBar: true,
@@ -909,6 +960,28 @@ const ChatsPageHook = () => {
     }, {})
   }
 
+  // all repeated codes will be reduced later
+  const momentDateAndTimeFormat = (lastSeenDateAndTime) => {
+    const currentDateTime = moment()
+          const lastSeenDateTime = moment(lastSeenDateAndTime) 
+          const isSameDay = currentDateTime.isSame(lastSeenDateTime, "day") 
+          const isMoreThanDay = currentDateTime.diff(lastSeenDateTime, "days") 
+          const isSameWeek = currentDateTime.isSame(lastSeenDateTime, "week") 
+          const isMoreThanWeek = currentDateTime.diff(lastSeenDateTime, "weeks") 
+    
+          if (isSameDay) {
+            return (lastSeenDateTime.format("[Today]"))
+          } else if (isMoreThanDay === 1) {
+            return (lastSeenDateTime.format("[Yesterday]"))
+          } else if (isMoreThanDay > 1 && isMoreThanDay < 5) {
+            return (lastSeenDateTime.format("ddd"))
+          } else if(isMoreThanDay >= 5 && isSameWeek) {
+            return (lastSeenDateTime.format("[Last] ddd"))
+          } else if (isMoreThanWeek >= 1) {
+            return (lastSeenDateTime.format("MMM DD"))
+          }
+  }
+
 
 
 
@@ -976,6 +1049,7 @@ const ChatsPageHook = () => {
       const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
+        width: "fit-content",
         showConfirmButton: false,
         timer: 2000,
         timerProgressBar: true,
@@ -995,6 +1069,7 @@ const ChatsPageHook = () => {
       const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
+        width: "fit-content",
         showConfirmButton: false,
         timer: 2000,
         timerProgressBar: true,
@@ -1080,7 +1155,7 @@ const ChatsPageHook = () => {
   }, []);
 
 
-  return [allUserChatsData, allUserChatsDataIsLoading, singleChatOffCanvasShow, singleChatOffCanvasHandleShow, singleChatOffCanvasHandleClose, usersData, usersDataIsLoading, offCanvasSreachInputValue, offCanvasInputOnChangeHandle, userCardOnClickHandle, createSingleChatResponse, createSingleChatResponseIsLoading, userCardonClickId, chatCardOnClickHandle, chatCardonClickId, chatCardRefs, chatCardActiveStatus, chatData, chatsContainerRef, endOfDataStatus, groupChatOffCanvasShow, groupChatOffCanvasHandleShow, groupChatOffCanvasHandleClose, offCanvasGroupNameInputValue, offCanvasGroupNameInputOnChangeHandle, offCanvasGroupNameInputRef, deleteUserIconOnClickHandle, offCanvasCreateGroupChatOnClickHandle, groupChatSearchResultsUserCardOnClickHandle, groupChatSelectedUsers, groupChatSelectedUsersId, createGroupChatResponse, createGroupChatResponseIsLoading, updatingDispatchLoader, clickedChatCardData, chatUserInfoIconOnClickHandle, updateGroupNameButtonOnClickHandle, renameGroupChatResponseIsLoading, updateGroupChatIconIsClicked, removeUserFromGroupChatResponseIsLoading, addUserToGroupChatResponseIsLoading, getAllChatMessagesData, getAllChatMessagesDataIsLoading, sendMessageInputValue, sendMessageInputOnChangeHandle, sendMessageInputRef, sendMessageInputOnKeyDownHandle, sendMessageOnClickHandle, messageCardImageOnClickHandle, messagesContainerRef, allChatMessages, chatCardIsClicked, typingData, onlineUsersData, isMobileSize, setIsMobileSize, groupOnlineUsers, lastSeen, hideNewMessageGroup, socket, specificChatDataIsLoading, setChatData, setChatCardIsClicked, setChatCardonClickId, setChatCardActiveStatus, setClickedChatCardData, groupChatMessages, setAllChatMessages, createMessageResponseIsLoading]
+  return [allUserChatsData, allUserChatsDataIsLoading, singleChatOffCanvasShow, singleChatOffCanvasHandleShow, singleChatOffCanvasHandleClose, usersData, usersDataIsLoading, offCanvasSreachInputValue, offCanvasInputOnChangeHandle, userCardOnClickHandle, createSingleChatResponse, createSingleChatResponseIsLoading, userCardonClickId, chatCardOnClickHandle, chatCardonClickId, chatCardRefs, chatCardActiveStatus, chatData, chatsContainerRef, endOfDataStatus, groupChatOffCanvasShow, groupChatOffCanvasHandleShow, groupChatOffCanvasHandleClose, offCanvasGroupNameInputValue, offCanvasGroupNameInputOnChangeHandle, offCanvasGroupNameInputRef, deleteUserIconOnClickHandle, offCanvasCreateGroupChatOnClickHandle, groupChatSearchResultsUserCardOnClickHandle, groupChatSelectedUsers, groupChatSelectedUsersId, createGroupChatResponse, createGroupChatResponseIsLoading, updatingDispatchLoader, clickedChatCardData, chatUserInfoIconOnClickHandle, updateGroupNameButtonOnClickHandle, renameGroupChatResponseIsLoading, updateGroupChatIconIsClicked, removeUserFromGroupChatResponseIsLoading, addUserToGroupChatResponseIsLoading, getAllChatMessagesData, getAllChatMessagesDataIsLoading, sendMessageInputValue, sendMessageInputOnChangeHandle, sendMessageInputRef, sendMessageInputOnKeyDownHandle, sendMessageOnClickHandle, messageCardImageOnClickHandle, messagesContainerRef, allChatMessages, chatCardIsClicked, typingData, onlineUsersData, isMobileSize, setIsMobileSize, groupOnlineUsers, lastSeen, hideNewMessageGroup, socket, specificChatDataIsLoading, setChatData, setChatCardIsClicked, setChatCardonClickId, setChatCardActiveStatus, setClickedChatCardData, groupChatMessages, setAllChatMessages, createMessageResponseIsLoading, setLastSeen, momentDateAndTimeFormat]
 }
 
 export default ChatsPageHook
