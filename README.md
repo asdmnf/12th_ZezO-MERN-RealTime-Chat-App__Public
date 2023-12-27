@@ -2,6 +2,8 @@
 
 This project was deployed at **[12th_ZezO-MERN-RealTime-Chat-App](https://asdmnf.github.io/12th_ZezO-MERN-RealTime-Chat-App__Public/)**.
 
+**[Video Preview](https://youtu.be/RNmaJn8aipg)**.
+
 ### `Important Note`
 
 > i followed [this tutorial](https://www.youtube.com/playlist?list=PLKhlp2qtUcSZsGkxAdgnPcHioRr-4guZf) as a guide only, you can see difference by yourself i added alot of missing features depending on myself and even you can compare my code to tutorial the similarity is almost weak, i am not watching tutorials code i do only if i fail.
