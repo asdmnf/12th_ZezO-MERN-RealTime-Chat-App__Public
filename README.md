@@ -39,9 +39,9 @@ This project was deployed at **[12th_ZezO-MERN-RealTime-Chat-App](https://asdmnf
 * Chats Pagination with Infinite Scroll (implemented manually not a package).
 > not all documents will be loaded, if you need more just scroll.
 
-### `Achieved by`
+### `Tech Stack`
 
-* socket.io.
+<!-- * socket.io.
 * reactjs.
 * nodejs.
 * expressjs.
@@ -54,7 +54,35 @@ This project was deployed at **[12th_ZezO-MERN-RealTime-Chat-App](https://asdmnf
 * formik.
 * yup.
 * lodash.
-* moment.
+* moment. -->
+* socket.io
+* NodeJS
+* ExpressJS
+* MongoDB
+mongoose
+* bcryptjs
+* body-parser
+* cloudinary
+* cors
+* dotenv
+* express-async-handler
+* express-validator
+* jsonwebtoken
+* socket.io-client
+* ReactJS
+* HTML
+* CSS
+* BOOTSTRAP
+* react-bootstrap
+* react-notification-badge
+* axios
+* @reduxjs/toolkit
+* react-redux
+* sweetalert2
+* formic
+* yup
+* lodash
+* moment
 
 ### `Note`
 
